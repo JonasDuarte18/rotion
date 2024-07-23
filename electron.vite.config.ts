@@ -11,11 +11,20 @@ const tsconfigPaths = tsconfigPathsPlugin({
 export default defineConfig({
   main: {
     plugins: [tsconfigPaths, externalizeDepsPlugin()],
-
     publicDir: path.resolve('resources'),
+    resolve: {
+      alias: {
+        '@shared': path.resolve('src/shared'),
+      },
+    },
   },
   preload: {
     plugins: [tsconfigPaths, externalizeDepsPlugin()],
+    resolve: {
+      alias: {
+        '@shared': path.resolve('src/shared'),
+      },
+    },
   },
   renderer: {
     define: {
@@ -33,6 +42,7 @@ export default defineConfig({
     resolve: {
       alias: {
         '@renderer': path.resolve('src/renderer/src'),
+        '@shared': path.resolve('src/shared'),
       },
     },
     plugins: [tsconfigPaths, react()],
